@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/stylesheet.css">
+    <title>Abhivineet's Movie Database</title>
+    <script>
+        function castImageError(element) {
+            element.onerror = null;
+            element.src = "https://bytes.usc.edu/cs571/s21_JSwasm00/hw/HW6/imgs/person-placeholder.png";
+        }
+        function movieImageError(element) {
+            element.onerror = null
+            element.src = "https://bytes.usc.edu/cs571/s21_JSwasm00/hw/HW6/imgs/movie-placeholder.jpg"
+        }
+
+        function posterImageError(element) {
+            element.onerror = null;
+            element.src = "https://cinemaone.net/images/movie_placeholder.png"
+        }
+    </script>
+</head>
+
+<body>
+    <div id="title_bar">
+        <span id="mdb_tit">
+            THE MOVIE DB
+        </span>
+        <span id="grad_tit"></span>
+    </div>
+    <div id="mother">
+        <div id=nav_border>
+            <button id="home_nav" onclick="openTab(event, 'home_page')" class="nav_contents active">
+                Home
+                <span id="home_arrow" class="arrow">
+                    &#10230;
+                </span>
+            </button>
+            <button id="search_nav" onclick="openTab(event,'search_page')" class="nav_contents">
+                Search
+                <span class="arrow" id="search_arrow">
+                    &#10230;
+                </span>
+            </button>
+        </div
+        ><div id="home_page" class="tabcontent">
+            <div id="home_align">
+                <div id="mover">
+                    <div id="mov" class="home_text">
+                        Trending Movies
+                    </div>
+                    <div class="img_holder_div">
+                        <img src="" id="mov_img" class="img_holders fade-in" onerror="movieImageError(this);">
+                        <div id="movie_banner" class="banner fade-in">
+                            <div class="banner_text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tv_container">
+                    <div id="tv" class="home_text">
+                        TV Shows On Air Today
+                    </div id="packer">
+                    <div class="img_holder_div" id="tv_image_holder">
+                        <img src="" id="tv_img" class="img_holders fade-in" onerror="movieImageError(this);">
+                        <div id="tv_banner" class="banner fade-in">
+                            <div class="banner_text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer_div" id="home_footer_div">
+                <div class="footer" id="home_footer">
+                    <div class="footer_1">Designed and developed by Abhivineet Veeraghanta</div>
+                    <div class="footer_2">Powered by TMDB</div>
+                </div>
+            </div>
+        </div
+        ><div id="search_page" class="tabcontent">
+            <div id="search_background">
+                <div id="search_header" class="search_elements">
+                    Search
+                </div>
+                <form action="" id="search_form" onsubmit="getSearchResults();return false">
+                    <div class="search_elements">
+                        <div id="keyword_holder">
+                            <label for="keyword" id="form_keyword">Keyword<span
+                                    class="spec"><sup>*</sup></span>&nbsp;&nbsp;</label>
+                            <input type="text" id="keyword">
+                        </div>
+                        <div id="category_holder">
+                            <label for="category" id="form_category">Category<span
+                                    class="spec"><sup>*</sup></span>&nbsp;&nbsp;</label>
+                            <select id="category">
+                                <option value="blank"></option>
+                                <option value="movies">Movies</option>
+                                <option value="tv">TV Shows</option>
+                                <option value="both">Movies and TV Shows</option>
+                            </select>
+                        </div>
+                        <div id="button_holder">
+                            <input type="button" id="submit" value="Search" onclick="getSearchResults();">
+                            <input type="button" id="reset" value="Clear" onclick="resetThis();">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="atbt12">No results found.</div>
+            <div id="search-results">
+                <span id="atbt13">Showing results...</span>
+                <div id="result_holder">
+
+                </div>
+            </div>
+            <div class="footer_div" id="search_footer_div">
+                <div class="footer" id="search_footer">
+                    <div class="footer_1">Designed and developed by Abhivineet Veeraghanta</div>
+                    <div class="footer_2">Powered by TMDB</div>
+                </div>
+            </div>
+            <div id="modal_container">
+                <div id="modal_holder">
+                    <div id="modal_aligner">
+                        <div id="modal_image_holder">
+                            <img id="modal_image" src="" onerror="movieImageError(this);">
+                        </div>
+                        <div id="modal_close_div">
+                            <button id="modal_close_button" onclick="closeModal();">&#10006;</button>
+                        </div>
+                    </div>
+                    <div id="modal_text_holder">
+                        <div id="modal_title_div"><span id="modal_title"></span><span id="modal_info_symbol">&#9432;</span></div>
+                        <div id="modal_info"></div>
+                        <div id="modal_voter"><span id="modal_voter_rating"></span></div>
+                        <div id="modal_overview"></div>
+                        <div id="modal_lang"></div>
+                    </div>
+                    <div id="modal_cast_holder">
+                        <div class="modal_head" id="cast_head">Cast</div>
+                        <div class="cast_row" id="cast_row_one">
+                            <div class="modal_cast_card" id="cast1">
+                                <div class="cast_image"><img id="cast_img1" src="" onerror="castImageError(this);">
+                                </div>
+                                <div class="cast_name" id="cast_name1"></div>
+                                <div class="as">AS</div>
+                                <div class="character_name" id="cast_char1"></div>
+                            </div>
+                            <div class="modal_cast_card" id="cast2">
+                                <div class="cast_image"><img id="cast_img2" src="" onerror="castImageError(this);">
+                                </div>
+                                <div class="cast_name" id="cast_name2"></div>
+                                <div class="as">AS</div>
+                                <div class="character_name" id="cast_char2"></div>
+                            </div>
+                            <div class="modal_cast_card" id="cast3">
+                                <div class="cast_image"><img id="cast_img3" src="" onerror="castImageError(this);">
+                                </div>
+                                <div class="cast_name" id="cast_name3"></div>
+                                <div class="as">AS</div>
+                                <div class="character_name" id="cast_char3"></div>
+                            </div>
+                            <div class="modal_cast_card" id="cast4">
+                                <div class="cast_image"><img id="cast_img4" src="" onerror="castImageError(this);">
+                                </div>
+                                <div class="cast_name" id="cast_name4"></div>
+                                <div class="as">AS</div>
+                                <div class="character_name" id="cast_char4"></div>
+                            </div>
+                        </div>
+                        <div class="cast_row" id="cast_row_two">
+                            <div class="modal_cast_card" id="cast5">
+                                <div class="cast_image"><img id="cast_img5" src="" onerror="castImageError(this);">
+                                </div>
+                                <div class="cast_name" id="cast_name5"></div>
+                                <div class="as">AS</div>
+                                <div class="character_name" id="cast_char5"></div>
+                            </div>
+                            <div class="modal_cast_card" id="cast6">
+                                <div class="cast_image"><img id="cast_img6" src="" onerror="castImageError(this);">
+                                </div>
+                                <div class="cast_name" id="cast_name6"></div>
+                                <div class="as">AS</div>
+                                <div class="character_name" id="cast_char6"></div>
+                            </div>
+                            <div class="modal_cast_card" id="cast7">
+                                <div class="cast_image"><img id="cast_img7" src="" onerror="castImageError(this);">
+                                </div>
+                                <div class="cast_name" id="cast_name7"></div>
+                                <div class="as">AS</div>
+                                <div class="character_name" id="cast_char7"></div>
+                            </div>
+                            <div class="modal_cast_card" id="cast8">
+                                <div class="cast_image"><img id="cast_img8" src="" onerror="castImageError(this);">
+                                </div>
+                                <div class="cast_name" id="cast_name8"></div>
+                                <div class="as">AS</div>
+                                <div class="character_name" id="cast_char8"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div >
+
+                    </div>
+                    <div id="modal_review_holder">
+                        <div id="rt123" class="modal_head">Reviews</div>
+                        <div class="modal_review" id="review_1">
+                            <div class="review_title"><span class="voter_name" id="review_title1"></span> <span
+                                    id="review_date1"></span></div>
+                            <div class="review_rating" id="review_rating1"></div>
+                            <div class="review_text" id="review_text1"></div>
+                            <hr class="divide_rule">
+                        </div>
+                        <div class="modal_review" id="review_2">
+                            <div class="review_title"><span class="voter_name" id="review_title2"></span> <span
+                                    id="review_date2"></span></div>
+                            <div class="review_rating" id="review_rating2"></div>
+                            <div class="review_text" id="review_text2"></div>
+                            <hr class="divide_rule">
+                        </div>
+                        <div class="modal_review" id="review_3">
+                            <div class="review_title"><span class="voter_name" id="review_title3"></span> <span
+                                    id="review_date3"></span></div>
+                            <div class="review_rating" id="review_rating3"></div>
+                            <div class="review_text" id="review_text3"></div>
+                            <hr class="divide_rule">
+                        </div>
+                        <div class="modal_review" id="review_4">
+                            <div class="review_title"><span class="voter_name" id="review_title4"></span> <span
+                                    id="review_date4"></span></div>
+                            <div class="review_rating" id="review_rating4"></div>
+                            <div class="review_text" id="review_text4"></div>
+                            <hr class="divide_rule">
+                        </div>
+                        <div class="modal_review" id="review_5">
+                            <div class="review_title"><span class="voter_name" id="review_title5"></span> <span
+                                    id="review_date5">12/12/12</span></div>
+                            <div class="review_rating" id="review_rating5"></div>
+                            <div class="review_text" id="review_text5"></div>
+                            <hr class="divide_rule">
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="static/script.js">
+    </script>
+</body>
+
+</html>
